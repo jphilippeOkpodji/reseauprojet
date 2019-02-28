@@ -12,8 +12,8 @@
 #define TRUE 1
 #define NBRECARACTERE 512
 #define TAILLEPSEUDO 50
-#define TAILLENOMENTREPRISE 50
-#define TAILLENAME 5
+#define TAILLENOMNIVEAUETUDE 50
+#define TAILLENOM 5
 
 /* Tableau comprenant les noms des entreprises */
 /* du groupe */

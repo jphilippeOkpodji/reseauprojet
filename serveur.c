@@ -16,7 +16,7 @@
 #define TRUE 1
 #define FALSE 0
 #define TAILLEPSEUDO 16
-#define TAILLENAME 5
+#define TAILLENOM 5
 #define TAILLEPRIVATE 8
 #define TAILLEBANIR 6
 #define EXIT_PSEUDO_ADD 4
@@ -24,12 +24,12 @@
 #define EXIT_PSEUDO_EXIST 2
 #define EXIT_PSEUDO_NOT_EXIST 1
 
-char* findMessage(char* data, int taille_data, int indiceDeb);
-char * findPseudoAfterName(char* data, int taille_data);
-char* findPseudoAfterPrivate(char* data, int taille_data);
+char* trouverMessage(char* data, int taille_donnee, int indiceDebut);
+char * findPseudoAfterName(char* data, int taille_donnee);
+char* findPseudoAfterPrivate(char* data, int taille_donnee);
 char * conception_message(char* m1, char* m2);
 char * conception_message_n(char* m1, char* m2, int n);
-char* findPseudoAfterBanir(char* data, int taille_data);
+char* findPseudoAfterBanir(char* data, int taille_donnee);
 
 int nb_connecte = 0;
 
@@ -70,3 +70,53 @@ Liste_Clients* init() {
     return list;
 }
 
+
+char* trouverMessage(char* data, int taille_donnee, int indiceDebut) {
+    char* msg = (char*) malloc((taille_donnee - indiceDebut+1) * sizeof (char));
+    int i = indiceDebut;
+    int j = 0;
+    
+    while(i< taille_donnee){
+        *(msg+j) = data[i];
+        i++;
+        j++;
+    }
+    *(msg+j)='\0';
+    return msg;
+}
+
+char* findPseudo(char* data, int taille_donnee, int tailleChamp) {
+    char* pseudo = (char*) malloc((taille_donnee - tailleChamp) * sizeof (char));
+    int i = 0;
+    
+    while ((i < taille_donnee - tailleChamp - 1)&&(data[i + tailleChamp + 1] != ' ')) {
+        *(pseudo + i) = data[i + tailleChamp + 1];
+        i++;
+    }
+    *(pseudo + i) = '\0';
+    return pseudo;
+}
+
+char* findPseudoAfterName(char* data, int taille_donnee) {
+    return findPseudo(data, taille_donnee, TAILLENOM);
+}
+
+
+char* findPseudoAfterPrivate(char* data, int taille_data) {
+    return findPseudo(data, taille_data, TAILLEPRIVATE);
+}
+
+char* findPseudoAfterBanir(char* data, int taille_data) {
+    return findPseudo(data, taille_data, TAILLEBANIR);
+}
+
+int imprimer_pseudo(char* pseudo) {
+    int i = 0;
+    
+    while (*(pseudo + i) != '\0') {
+        fprintf(stderr, "%c", *(pseudo + i));
+        i++;
+    }
+    fprintf(stderr, "\n");
+    return EXIT_SUCCESS;
+}
