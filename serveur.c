@@ -143,3 +143,24 @@ char * conception_message(char* message1, char* message2) {
     return message;
 }
 
+/*
+ * cette fonction fait la même chose que conception_message mais ne prend que les n premiers bit de m2
+ */
+
+char * conception_message_n(char* message1, char* message2, int n) {
+    char * message = (char*) malloc((strlen(message1) + n + 1) * sizeof (char));
+    int i = 0, j = 0;
+    
+    while (*(message1 + i) != '\0') {
+        *(message + i) = *(message1 + i);
+        i++;
+    }
+    
+    while ((*(message2 + j) != '\0')&&(j < n)) {
+        *(message + i) = *(messag2 + j);
+        i++;
+        j++;
+    }
+    *(message + i) = '\0';
+    return message;
+}
