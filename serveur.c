@@ -21,8 +21,8 @@
 #define TAILLEBANIR 6
 #define EXIT_PSEUDO_ADD 4
 #define EXIT_PSEUDO_CHANGE 3
-#define EXIT_PSEUDO_EXIST 2
-#define EXIT_PSEUDO_NOT_EXIST 1
+#define PSEUDO_EXIST 0
+#define PSEUDO_NOT_EXIST 1
 
 char* trouverMessage(char* data, int taille_donnee, int indiceDebut);
 char * findPseudoAfterName(char* data, int taille_donnee);
@@ -102,12 +102,12 @@ char* findPseudoAfterName(char* data, int taille_donnee) {
 }
 
 
-char* findPseudoAfterPrivate(char* data, int taille_data) {
-    return findPseudo(data, taille_data, TAILLEPRIVATE);
+char* findPseudoAfterPrivate(char* data, int taille_donnee) {
+    return findPseudo(data, taille_donnee, TAILLEPRIVATE);
 }
 
-char* findPseudoAfterBanir(char* data, int taille_data) {
-    return findPseudo(data, taille_data, TAILLEBANIR);
+char* findPseudoAfterBanir(char* data, int taille_donnee) {
+    return findPseudo(data, taille_donnee, TAILLEBANIR);
 }
 
 int imprimer_pseudo(char* pseudo) {
@@ -163,4 +163,20 @@ char * conception_message_n(char* message1, char* message2, int n) {
     }
     *(message + i) = '\0';
     return message;
+}
+/*
+ * pseudoExist renvoi 0 si le pseudo existe déjà 1 sinon
+ */
+
+int pseudoExist(char* pseudo, Liste_Clients* list) {
+    Case* pointeurP = list->beginp;
+    
+    while ((pointeurP != NULL)&&(strcmp(pointeurP->pseudo, pseudo) != 0)) {
+        
+        pointeurP = pointeurP->nextp;
+    }
+    
+    if (pointeurP == NULL)
+        return PSEUDO_NOT_EXIST;
+    else return PSEUDO_EXIST;
 }
