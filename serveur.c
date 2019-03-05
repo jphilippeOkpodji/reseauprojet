@@ -27,8 +27,8 @@
 char* trouverMessage(char* data, int taille_donnee, int indiceDebut);
 char * findPseudoAfterName(char* data, int taille_donnee);
 char* findPseudoAfterPrivate(char* data, int taille_donnee);
-char * conception_message(char* m1, char* m2);
-char * conception_message_n(char* m1, char* m2, int n);
+char * conception_message(char* message1, char* message2);
+char * conception_message_n(char* message1, char* message2, int n);
 char* findPseudoAfterBanir(char* data, int taille_donnee);
 
 int nb_connecte = 0;
@@ -120,3 +120,26 @@ int imprimer_pseudo(char* pseudo) {
     fprintf(stderr, "\n");
     return EXIT_SUCCESS;
 }
+
+/*
+ * Cette fonction va permettre de concatener des messages
+ */
+
+char * conception_message(char* message1, char* message2) {
+    char * message = (char*) malloc((strlen(message1) + strlen(message2) + 1) * sizeof (char));
+    int i = 0, j = 0;
+    
+    while (*(message1 + i) != '\0') {
+        *(message + i) = *(message1 + i);
+        i++;
+    }
+    
+    while (*(message2 + j) != '\0') {
+        *(message + i) = *(message2 + j);
+        i++;
+        j++;
+    }
+    *(message + i) = '\0';
+    return message;
+}
+
