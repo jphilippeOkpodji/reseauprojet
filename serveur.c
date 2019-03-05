@@ -164,3 +164,31 @@ char * conception_message_n(char* message1, char* message2, int n) {
     *(message + i) = '\0';
     return message;
 }
+
+int main(int argc, char *argv[]) {
+    int c;
+    char* ip = "127.0.0.1";
+    int port = 9999;
+    while ((c = getopt(argc, argv, "a:p:")) != -1)
+        switch (c) {
+            case 'a':
+                ip = optarg;
+                break;
+            case 'p':
+                port = atoi(optarg);
+                break;
+            default:
+                printf("./serveur [-pa]\n");
+                printf("-p : numero de port\n");
+                printf("-a : adresse ip du serveur\n");
+                break;
+        }
+
+    printf("adresse ip : %s \n", ip);
+    printf("port : %d \n", port);
+
+    creation_serv(ip, port);
+
+
+    return EXIT_SUCCESS;
+}
