@@ -222,3 +222,4 @@ int main(int argc, char* argv[]) {
     params = choose_pseudo_connexion(name, sock, niveauEtude);
     routine_client(sock);
     return 1;
+}
