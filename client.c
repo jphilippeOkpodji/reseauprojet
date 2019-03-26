@@ -17,7 +17,7 @@
 
 /* Tableau comprenant les noms des entreprises */
 /* du groupe */
-char NIVEAUETUDE[4][12]= {"Masterclassique", "Masteralternance", "Licence"};
+char NIVEAUETUDE[4][12]= {"Mclassique", "Malternance", "Licence"};
                  
 
 struct paramsUser {
